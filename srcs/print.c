@@ -6,13 +6,13 @@
 /*   By: ysalaun <ysalaun@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 13:53:52 by ysalaun           #+#    #+#             */
-/*   Updated: 2018/02/15 00:25:48 by ysalaun          ###   ########.fr       */
+/*   Updated: 2018/02/15 01:49:28 by ysalaun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void		return_elem(t_elem **list)
+void			return_elem(t_elem **list)
 {
 	t_elem	*tmp;
 	int		i;
@@ -38,7 +38,7 @@ void		return_elem(t_elem **list)
 	exit_term();
 }
 
-void		print_end(char **my_tab, int i)
+void			print_end(char **my_tab, int i)
 {
 	int j;
 
@@ -54,7 +54,7 @@ void		print_end(char **my_tab, int i)
 		ft_putchar('\n');
 }
 
-void		print_list(t_elem **alst)
+void			print_list(t_elem **alst)
 {
 	t_elem	*tmp;
 

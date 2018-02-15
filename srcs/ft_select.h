@@ -6,7 +6,7 @@
 /*   By: ysalaun <ysalaun@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:48:34 by ysalaun           #+#    #+#             */
-/*   Updated: 2018/02/14 16:52:38 by ysalaun          ###   ########.fr       */
+/*   Updated: 2018/02/15 01:37:53 by ysalaun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <term.h>
 # include <termios.h>
 # include <signal.h>
+# include <sys/ioctl.h>
 # define RED "\033[1;31m"
 # define NORMAL "\033[0m"
 

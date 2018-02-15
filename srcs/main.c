@@ -6,7 +6,7 @@
 /*   By: ysalaun <ysalaun@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:50:39 by ysalaun           #+#    #+#             */
-/*   Updated: 2018/02/15 00:07:07 by ysalaun          ###   ########.fr       */
+/*   Updated: 2018/02/15 02:00:06 by ysalaun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,28 @@ void				sig_handler(int a)
 		exit_term();
 	}
 }
+void	size_window(t_elem **list)
+{
+	struct winsize	ws;
+	t_elem			*tmp;
+	int				i;
+	int				count;
+
+	count = 0;
+	ioctl(0, TIOCGWINSZ, &ws);
+	tmp = *list;
+	while (tmp)
+	{
+		i = 0;
+		while (tmp->name[i])
+			i++;
+		count = count + i + 4;
+		tmp = tmp->next;
+	}
+	printf("\ncount ==> %d\n", count);
+	printf("col ==> %d\n", ws.ws_col);
+	printf("row ==> %d\n", ws.ws_row);
+}
 int				main (int argc, char **argv, char **env)
 {
 	char buffer[3];
@@ -102,10 +124,11 @@ int				main (int argc, char **argv, char **env)
 	while (1)
 	{
 		print_list(&list);
+		size_window(&list);
 		ft_bzero(buffer, 4);
 		if (read(0, buffer, 3) == -1)
 			exit_term();
-	signal(SIGINT, sig_handler);
+		signal(SIGINT, sig_handler);
 		// ft_putchar('\n');
 		// ft_putnbr(buffer[0]);
 		// ft_putchar('\n');
@@ -114,18 +137,20 @@ int				main (int argc, char **argv, char **env)
 		// ft_putnbr(buffer[2]);
 		// ft_putchar('\n');
 		// sleep(1);
+		ft_putstr(tgetstr("cl", NULL));
 		if (buffer[0] == 27)
 			witch_arrow(buffer, &list);
-		if (buffer[0] == 4 || buffer[0] == 15)
+		else if (buffer[0] == 4 || buffer[0] == 15)
 			exit_term();
-		if (buffer[0] == 32 && buffer[1] == 0 && buffer[2] == 0)
+		else if (buffer[0] == 32 && buffer[1] == 0 && buffer[2] == 0)
 		{
 			choose(&list);
 			moove_curs_right(&list);
 		}
-		ft_putstr(tgetstr("cl", NULL));
-		if (buffer[0] == 10 && buffer[1] == 0 && buffer[2] == 0)
+		else if (buffer[0] == 10 && buffer[1] == 0 && buffer[2] == 0)
 			return_elem(&list);
+		else
+			;
 	}
 	return (0);
 }
